@@ -17,7 +17,7 @@ class AdminSidebar extends StatelessWidget {
       {'icon': Icons.notification_add_outlined, 'label': 'Const Notification', 'route': '/notification-templates'},
       {'icon': Icons.payment, 'label': 'Payment Charges', 'route': '/payment-charge'},
       {'icon': Icons.post_add, 'label': 'Poster', 'route': '/poster'},
-      {'icon': Icons.post_add, 'label': 'Poster', 'route': '/notification_sample_data'},
+      
       
     ];
 
