@@ -31,4 +31,17 @@ class NotificationTemplate {
       profileRejectedDesc: map['profileRejectedDesc'] ?? '',
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'billApprovedTitle': billApprovedTitle,
+      'billApprovedDesc': billApprovedDesc,
+      'billRejectedTitle': billRejectedTitle,
+      'billRejectedDesc': billRejectedDesc,
+      'profileApprovedTitle': profileApprovedTitle,
+      'profileApprovedDesc': profileApprovedDesc,
+      'profileRejectedTitle': profileRejectedTitle,
+      'profileRejectedDesc': profileRejectedDesc,
+    };
+  }
 }

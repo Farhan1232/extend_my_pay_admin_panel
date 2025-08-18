@@ -31,6 +31,18 @@ class UserProfile {
 
   factory UserProfile.fromMap(Map<String, dynamic> map) {
     final location = map['location'] ?? {};
+
+    String fixUrl(String? url) {
+      if (url == null || url.isEmpty) return '';
+      if (url.startsWith('https://firebasestorage.googleapis.com')) return url;
+      if (url.contains('extendmypay.firebasestorage.app')) {
+        // Convert old domain to new format
+        final cleanedPath = url.split('/o/').last.split('?').first;
+        return 'https://firebasestorage.googleapis.com/v0/b/extendmypay.appspot.com/o/$cleanedPath?alt=media';
+      }
+      return url;
+    }
+
     return UserProfile(
       uid: map['uid'] ?? '',
       firstName: map['firstName'] ?? '',
@@ -39,9 +51,9 @@ class UserProfile {
       phone: map['phone'] ?? '',
       dob: map['dob'] ?? '',
       status: map['status'] ?? '',
-      profileImageUrl: map['profileImageUrl'] ?? '',
-      idFrontUrl: map['idFrontUrl'] ?? '',
-      idBackUrl: map['idBackUrl'] ?? '',
+      profileImageUrl: fixUrl(map['profileImageUrl']),
+      idFrontUrl: fixUrl(map['idFrontUrl']),
+      idBackUrl: fixUrl(map['idBackUrl']),
       address: location['address'] ?? '',
       latitude: location['latitude'] ?? 0.0,
       longitude: location['longitude'] ?? 0.0,

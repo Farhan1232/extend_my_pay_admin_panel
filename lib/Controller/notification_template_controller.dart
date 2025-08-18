@@ -7,13 +7,17 @@ class NotificationTemplateController {
   Future<NotificationTemplate?> fetchTemplate() async {
     try {
       final doc = await _firestore.collection('notification_templates').doc('templates').get();
-
       if (doc.exists) {
         return NotificationTemplate.fromMap(doc.data()!);
       }
-    } catch (e) {
-      print('Error fetching notification templates: $e');
-    }
+    } catch (_) {}
     return null;
+  }
+
+  Future<void> saveTemplate(NotificationTemplate template) async {
+    await _firestore
+        .collection('notification_templates')
+        .doc('templates')
+        .set(template.toMap());
   }
 }

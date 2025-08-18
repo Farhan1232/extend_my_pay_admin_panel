@@ -7,6 +7,12 @@ import 'package:flutter/material.dart';
 
 class ProfileProvider extends ChangeNotifier {
   final FirestoreService _firestoreService = FirestoreService();
+
+int get approvedCount => _profiles.where((p) => p.status == 'approved').length;
+int get rejectedCount => _profiles.where((p) => p.status == 'rejected').length;
+int get pendingCount => _profiles.where((p) => p.status == 'pending').length;
+
+
   List<UserProfile> _profiles = [];
   bool _isLoading = true;
 

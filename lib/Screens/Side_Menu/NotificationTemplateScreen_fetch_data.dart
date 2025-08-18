@@ -1,6 +1,6 @@
+import 'package:extend_my_pay_admin_panel/Provider/notification_template_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../Provider/notification_template_provider.dart';
 
 class NotificationTemplate_fetch_data_Screen extends StatelessWidget {
   const NotificationTemplate_fetch_data_Screen({super.key});

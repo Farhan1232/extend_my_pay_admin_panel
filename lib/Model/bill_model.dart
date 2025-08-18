@@ -15,7 +15,8 @@ class BillModel {
   final DateTime? approvalDate;
   final String? receiptUrl;
   final String billingCompanyName;
-  final String? receiptStatus; // ✅ NEW
+  final String? receiptStatus;
+  final bool paid; // ✅ NEW
 
   BillModel({
     required this.category,
@@ -32,7 +33,8 @@ class BillModel {
     required this.billingCompanyName,
     this.approvalDate,
     this.receiptUrl,
-    this.receiptStatus, // ✅ NEW
+    this.receiptStatus,
+    this.paid = false, // ✅ Default to false
   });
 
   factory BillModel.fromMap(Map<String, dynamic> map, String docId) {
@@ -51,7 +53,8 @@ class BillModel {
       billingCompanyName: map['billingCompanyName'] ?? '',
       approvalDate: map['approvalDate'] != null ? (map['approvalDate'] as Timestamp).toDate() : null,
       receiptUrl: map['receiptUrl'],
-      receiptStatus: map['receiptStatus'], // ✅ NEW
+      receiptStatus: map['receiptStatus'],
+      paid: map['paid'] ?? false, // ✅ Default to false if null
     );
   }
 
@@ -68,9 +71,10 @@ class BillModel {
       'status': status,
       'uid': uid,
       'billingCompanyName': billingCompanyName,
+      'paid': paid, // ✅ Include in map
       if (approvalDate != null) 'approvalDate': approvalDate,
       if (receiptUrl != null) 'receiptUrl': receiptUrl,
-      if (receiptStatus != null) 'receiptStatus': receiptStatus, // ✅ NEW
+      if (receiptStatus != null) 'receiptStatus': receiptStatus,
     };
   }
 
@@ -89,7 +93,8 @@ class BillModel {
     DateTime? approvalDate,
     String? receiptUrl,
     String? billingCompanyName,
-    String? receiptStatus, // ✅ NEW
+    String? receiptStatus,
+    bool? paid, // ✅ NEW
   }) {
     return BillModel(
       category: category ?? this.category,
@@ -106,7 +111,8 @@ class BillModel {
       approvalDate: approvalDate ?? this.approvalDate,
       receiptUrl: receiptUrl ?? this.receiptUrl,
       billingCompanyName: billingCompanyName ?? this.billingCompanyName,
-      receiptStatus: receiptStatus ?? this.receiptStatus, // ✅ NEW
+      receiptStatus: receiptStatus ?? this.receiptStatus,
+      paid: paid ?? this.paid, // ✅ NEW
     );
   }
 }

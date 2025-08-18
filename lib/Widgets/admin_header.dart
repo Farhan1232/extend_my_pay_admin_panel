@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AdminHeader extends StatelessWidget {
   final String title;
@@ -37,18 +38,32 @@ class AdminHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      color: Colors.teal,
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+      decoration: BoxDecoration(
+        color: Color(0xFFFF941A),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 8.r,
+            offset: Offset(0, 3),
+          )
+        ],
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(16.r),
+          bottomRight: Radius.circular(16.r),
+        ),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           /// 🧾 Title
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 20,
+            style: TextStyle(
+              fontSize: 22.sp,
               color: Colors.white,
               fontWeight: FontWeight.bold,
+              letterSpacing: 1,
             ),
           ),
 
@@ -63,28 +78,35 @@ class AdminHeader extends StatelessWidget {
                   return Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      IconButton(
-                        icon: const Icon(Icons.notifications, color: Colors.white),
-                        tooltip: 'Notifications',
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/admin_notifications');
-                        },
-                      ),
+                      // IconButton(
+                      //   icon: Icon(Icons.notifications_none, color: Colors.white, size: 26.sp),
+                      //   tooltip: 'Notifications',
+                      //   onPressed: () {
+                      //     Navigator.pushNamed(context, '/admin_notifications');
+                      //   },
+                      // ),
                       if (count > 0)
                         Positioned(
-                          right: 4,
-                          top: -2,
+                          right: 4.w,
+                          top: -4.h,
                           child: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
+                            padding: EdgeInsets.all(5.r),
+                            decoration: BoxDecoration(
                               color: Colors.red,
                               shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 4.r,
+                                ),
+                              ],
                             ),
                             child: Text(
                               count.toString(),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 12,
+                                fontSize: 11.sp,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
@@ -93,8 +115,9 @@ class AdminHeader extends StatelessWidget {
                   );
                 },
               ),
+              SizedBox(width: 8.w),
               IconButton(
-                icon: const Icon(Icons.logout, color: Colors.white),
+                icon: Icon(Icons.logout, color: Colors.white, size: 24.sp),
                 tooltip: 'Logout',
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
@@ -104,10 +127,20 @@ class AdminHeader extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(width: 8),
-              const CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(Icons.admin_panel_settings, color: Colors.teal),
+              SizedBox(width: 12.w),
+              Container(
+                padding: EdgeInsets.all(4.r),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 4.r,
+                    )
+                  ],
+                ),
+                child: Icon(Icons.admin_panel_settings, color: Color(0xFFFF941A), size: 24.sp),
               ),
             ],
           ),
